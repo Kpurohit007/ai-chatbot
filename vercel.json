@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "DEEPSEEK_API_KEY": "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"
+  }
+}
