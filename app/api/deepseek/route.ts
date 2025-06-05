@@ -4,16 +4,13 @@ export async function POST(request: NextRequest) {
   try {
     const { message, context } = await request.json()
 
-    // DeepSeek API configuration
-    const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
     const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY
 
     if (!DEEPSEEK_API_KEY) {
-      console.error("DeepSeek API key not found")
-      return NextResponse.json({ error: "DeepSeek API key not configured" }, { status: 500 })
+      return NextResponse.json({ error: "API key not configured" }, { status: 500 })
     }
 
-    const response = await fetch(DEEPSEEK_API_URL, {
+    const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,25 +21,20 @@ export async function POST(request: NextRequest) {
         messages: [
           {
             role: "system",
-            content:
-              context ||
-              "You are Brenin AI, a helpful digital human assistant. Provide accurate, helpful, and engaging responses. Be conversational and friendly.",
+            content: context || "You are Brenin AI, a helpful digital human assistant.",
           },
           {
             role: "user",
             content: message,
           },
         ],
-        max_tokens: 1000,
+        max_tokens: 500,
         temperature: 0.7,
-        stream: false,
       }),
     })
 
     if (!response.ok) {
-      const errorData = await response.text()
-      console.error("DeepSeek API error:", response.status, errorData)
-      return NextResponse.json({ error: "Failed to get response from DeepSeek" }, { status: response.status })
+      throw new Error(`DeepSeek API error: ${response.status}`)
     }
 
     const data = await response.json()
