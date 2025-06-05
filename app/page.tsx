@@ -1,4 +1,4 @@
-import DigitalHuman from "@/components/digital-human"
+import DigitalAssistant from "@/components/digital-human"
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
           Brenin Digital Human
         </h1>
-        <DigitalHuman />
+        <DigitalAssistant />
       </div>
     </main>
   )
