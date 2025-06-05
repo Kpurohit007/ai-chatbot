@@ -277,26 +277,25 @@ export default function DigitalAssistant() {
               <Mic className="h-5 w-5 text-gray-600" />
             </Button>
 
-            {/* File Upload Button - New + button */}
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full h-12 w-12 border-gray-200 hover:bg-gray-50"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <Plus className="h-5 w-5 text-gray-600" />
-            </Button>
-
-            {/* Input Field - Exact match */}
-            <div className="flex-1">
+            {/* Input Field with integrated + button */}
+            <div className="flex-1 relative">
               <Input
                 ref={inputRef}
                 placeholder="Type your message..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                className="rounded-full h-12 px-6 border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-300 focus:ring-blue-200 text-gray-700 placeholder-gray-500"
+                className="rounded-full h-12 pl-6 pr-12 border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-300 focus:ring-blue-200 text-gray-700 placeholder-gray-500"
               />
+              {/* File Upload Button - Integrated in prompt bar */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full h-8 w-8 hover:bg-gray-200"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Plus className="h-5 w-5 text-blue-600" />
+              </Button>
             </div>
 
             {/* Send Button - Exact blue gradient match */}
